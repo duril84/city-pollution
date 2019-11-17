@@ -1,15 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .app {
   border: 1px solid red;
+  background-color: rgb(0, 92, 104);
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.app_search {
-  margin: 20px;
-  width: 50%;
-  max-width: 300px;
 }
