@@ -14,7 +14,7 @@ Cities page:
 Clone repository
 - git clone https://github.com/duril84/city-pollution.git
 
-In the directory with the downloaded repository
+In the directory with the downloaded repository in city-pollution-app folder
 - git checkout development
 - npm start
 
