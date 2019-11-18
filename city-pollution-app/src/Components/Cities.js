@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from './Button';
+import Loader from 'react-loader-spinner'
 
 import '../Styles/_cities.scss';
 
@@ -79,7 +80,15 @@ class Cities extends Component {
                 })}
             </ol>
           ) : (
-            `Loading... `
+            <div className="loader">
+              <Loader
+                type="TailSpin"
+                color="#4C69A2"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+              />
+            </div>
           )
         }
         <Button name={'Home'} path={'/'} selectedCountryCode={sessionStorage.getItem('appSessionStorage')}/>
