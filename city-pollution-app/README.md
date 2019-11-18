@@ -6,7 +6,7 @@ Home page:
 
 Cities page:
 
-![alt text](https://github.com/duril84/city-pollution/blob/development/city-pollution-app/app_screen1.png)
+![alt text](https://github.com/duril84/city-pollution/blob/development/city-pollution-app/app_screen2.png)
 
 --------------------------------
 
