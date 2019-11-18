@@ -4,9 +4,50 @@
   align-items: center;
   flex-direction: column;
   .title{
-    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2.5vw;
+    font-weight: 800;
+    color: #4C69A2;
   }
   .list {
     list-style: decimal;
+    height: 75vh;
+    width: 75vw;
+    margin: 1rem;
+    overflow: auto;
+    .item {
+      margin: 0.5rem;
+      border: 1px solid gray;
+      border-radius: 0 20px 0 0px;
+      display: flex;
+      flex-direction: column;
+      .top {
+        background-color: #4C69A2;
+        color: white;
+        border-radius: 0 20px 0 0px;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid gray;
+        .name {
+          width: 40%;
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+        .value {
+          width: 20%;
+        }
+        .date {
+          width: 20%;
+        }
+      }
+      .bottom {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
   }
 }

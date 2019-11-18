@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from './Button';
 
+import '../Styles/_cities.scss';
+
 class Cities extends Component {
   state = {
     cities: [],
@@ -26,6 +28,9 @@ class Cities extends Component {
         const uniqueCities = this.getUnique(cities,'name').slice(0,10);
         uniqueCities.map( city => { return ( this.getCityDescription(city)) } );
       })
+      .catch(error => {
+        throw(error);
+      })
   }
 
   getCityDescription( city ) {
@@ -42,25 +47,33 @@ class Cities extends Component {
           this.setState({
             cities: [...this.state.cities, {name: city.name, value: city.value, date: city.date, description: info,}],
           })
+      })
+      .catch(error => {
+        throw(error);
       });
   }
 
   render() { 
     const { cities } = this.state;
     return (
-      <div>
+      <div className="cities">
         <h1 className="title">{`Top 10 most polluted cities in 2019`}</h1>
         { cities.length === 10 ? ( 
             <ol className="list">
               {
-              cities.sort((a, b) => b.value - a.value).map( (city) => {
+              cities.sort((a, b) => b.value - a.value).map( (city,i) => {
                 const date = new Date(city.date); 
                 return (
-                  <li key={city.name} >
-                    <div className="name"> {city.name} </div>
-                    <div className="value"> pm2.5 value {city.value} µg/m³ </div>
-                    <div className="date"> date of measurement {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()} </div>
-                    <div className="description"> {city.description.slice(0,200)+'...'} </div>
+                  <li className="item" key={city.name} >
+                    <div className="top">
+                      <div className="name"> {i+1}. {city.name} </div>
+                      <div className="value"> pm2.5 value<br />{city.value} µg/m³ </div>
+                      <div className="date"> date of measurement<br />{date.getDate()}/{date.getMonth()+1}/{date.getFullYear()} </div>
+                    </div>
+                    <div className="bottom">
+                      <div className="description"> {city.description} </div> 
+                      {/* .slice(0,200)+'...' */}
+                    </div>
                   </li> 
                 )
                 })}
