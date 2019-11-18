@@ -14,7 +14,6 @@ class Search extends Component {
 
   render() { 
     const { items } = this.state;
-    console.log(items);
     return (
       <div className='search'>
         <label>Search </label>

@@ -24,7 +24,6 @@ class Home extends Component {
 
   componentDidMount() {
     if ( sessionStorage.getItem('appSessionStorage') !== null ) {
-      console.log('mount '+sessionStorage.getItem('appSessionStorage'));
       this.setState({
         selectedCountry: sessionStorage.getItem('appSessionStorage'),
       });
