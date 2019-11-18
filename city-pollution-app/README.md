@@ -2,11 +2,12 @@
 
 Home page:
 
-![alt text](https://github.com/duril84/city-pollution/blob/development/app_screen1.png)
+![alt text](https://raw.githubusercontent.com/duril84/city-pollution/development/city-pollution/city-pollution-app/app_screen1.png)
 
 Cities page:
 
-![alt text](https://github.com/duril84/city-pollution/blob/development/app_screen2png)
+![alt text](https://raw.githubusercontent.com/duril84/city-pollution/development/city-pollution/city-pollution-app/app_screen2.png)
+
 --------------------------------
 
 # Instruction:
