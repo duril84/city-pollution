@@ -14,13 +14,12 @@ class Search extends Component {
 
   render() { 
     const { items } = this.state;
-    console.log(items);
     return (
       <div className='search'>
-        <label>Search </label>
+        <label>Search cities in </label>
         <input list='suggestions' onChange={e=>this.onCountrySelected(e)} placeholder={this.props.placeholder}/>
         <datalist id='suggestions'>
-          { items.map( item => <option key={item.code} value={`${item.name}, [${item.code}]`} /> ) }
+          { items.map( item => <option key={item.code} value={`${item.name}`} /> ) }
         </datalist>
       </div>
     );

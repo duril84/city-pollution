@@ -14,19 +14,26 @@ class Home extends Component {
       {name: 'France', code: 'FR'},
     ],
     selectedCountry: '',
+    selectedCountryCode: '',
   }
 
   onCountrySelected = (selectedCountry) => {
+    const selectedCountryCode = this.state.items.map(item => ( item.name === selectedCountry && ( item.code ) ) ).filter( v => v );
+    sessionStorage.setItem('appSessionStorage', selectedCountryCode);
+  
     this.setState({
-      selectedCountry
+      selectedCountry,
+      selectedCountryCode,
     });
   }
 
   componentDidMount() {
     if ( sessionStorage.getItem('appSessionStorage') !== null ) {
-      console.log('mount '+sessionStorage.getItem('appSessionStorage'));
+      const selectedCountryCode = sessionStorage.getItem('appSessionStorage');
+      const selectedCountry = this.state.items.map(item => ( item.code === selectedCountryCode && ( item.name ) ) ).filter( v => v );
       this.setState({
-        selectedCountry: sessionStorage.getItem('appSessionStorage'),
+        selectedCountry,
+        selectedCountryCode,
       });
     }
   }
@@ -37,7 +44,7 @@ class Home extends Component {
       <div className="home">
          <h1 className="title">City Pollution App</h1>
         <Search onCountrySelected={this.onCountrySelected} suggestions={items} placeholder={this.state.selectedCountry}/>
-        <Button name={'Find Cities'} path={`/cities`} selectedCountry={this.state.selectedCountry}/>
+        <Button name={'Find Cities'} path={`/cities`} selectedCountryCode={this.state.selectedCountryCode}/>
       </div>
     );
   }
