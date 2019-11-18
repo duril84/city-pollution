@@ -1,6 +1,25 @@
 # City-pollution app
-Implementation of Tetris in React
 
-# # # # # # # # # # # # #
-J A C E K 
-B I A D A C Z
+Home page:
+
+![alt text](https://github.com/duril84/city-pollution/blob/development/app_screen1.png)
+
+Cities page:
+
+![alt text](https://github.com/duril84/city-pollution/blob/development/app_screen2png)
+--------------------------------
+
+# Instruction:
+Clone repository
+- git clone https://github.com/duril84/city-pollution.git
+
+In the directory with the downloaded repository
+- git checkout development
+- npm start
+
+ 
+In your browser, open http://localhost:3000/#/
+
+--------------------------------
+# Author
+JACEK BIADACZ
