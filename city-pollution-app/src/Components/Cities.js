@@ -4,8 +4,6 @@ import Button from './Button';
 class Cities extends Component {
   state = {
     cities: [],
-    country: '',
-    description: '',
   }
 
   getUnique(arr,comp){
@@ -15,17 +13,7 @@ class Cities extends Component {
   }
 
   componentDidMount() {
-    
-    let countryCode = '';
-    let countryName = '';
-    const fromSessionStorage = sessionStorage.getItem('appSessionStorage');
-    if ( fromSessionStorage !== null ) {
-      countryCode = fromSessionStorage.slice( fromSessionStorage.indexOf('[')+1, fromSessionStorage.indexOf(']') );
-      countryName = fromSessionStorage.slice( 0, fromSessionStorage.indexOf(',') );
-      this.setState({
-        country: countryName,
-      })
-    }
+    const countryCode = sessionStorage.getItem('appSessionStorage');
     this.getMostPollutedCities(countryCode);
   }
   
@@ -40,8 +28,6 @@ class Cities extends Component {
       })
   }
 
-  
-
   getCityDescription( city ) {
     const apiEndpoint = `https://en.wikipedia.org/w/api.php`;
     const params = `action=query&prop=extracts&exintro&explaintext&format=json&redirects&titles=`+city.name;
@@ -51,7 +37,7 @@ class Cities extends Component {
           const pageNum = Object.keys(res.query.pages);
           let info = res.query.pages[pageNum[0]].extract;
           if ( typeof info !== 'string' ) {
-            info = '[]'
+            info = 'Sorry, no data was found for the city'
           }
           this.setState({
             cities: [...this.state.cities, {name: city.name, value: city.value, date: city.date, description: info,}],
@@ -61,12 +47,10 @@ class Cities extends Component {
 
   render() { 
     const { cities } = this.state;
-    // this.getData();
     return (
       <div>
-        <h1 className="title">{`Top 10 most polluted cities in ${this.state.country} in 2019`}</h1>
+        <h1 className="title">{`Top 10 most polluted cities in 2019`}</h1>
         { cities.length === 10 ? ( 
-            // console.log( cities.sort((a, b) => b.value - a.value) )
             <ol className="list">
               {
               cities.sort((a, b) => b.value - a.value).map( (city) => {
@@ -82,10 +66,10 @@ class Cities extends Component {
                 })}
             </ol>
           ) : (
-            `Loading...`
+            `Loading... `
           )
         }
-        <Button name={'Home'} path={'/'} selectedCountry={sessionStorage.getItem('appSessionStorage')}/>
+        <Button name={'Home'} path={'/'} selectedCountryCode={sessionStorage.getItem('appSessionStorage')}/>
         
       </div>
     );

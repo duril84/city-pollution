@@ -6,7 +6,7 @@ class Button extends Component {
   state = {  }
 
   saveSessionStorage() {
-    sessionStorage.setItem('appSessionStorage', this.props.selectedCountry);
+    sessionStorage.setItem('appSessionStorage', this.props.selectedCountryCode);
   }
 
   render() { 
