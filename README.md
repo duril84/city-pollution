@@ -2,11 +2,11 @@
 
 Home page:
 
-![alt text](https://github.com/duril84/city-pollution/blob/development/city-pollution-app/app_screen1.png)
+![alt text](https://github.com/duril84/city-pollution/blob/development/app_screen1.png)
 
 Cities page:
 
-![alt text](https://github.com/duril84/city-pollution/blob/development/city-pollution-app/app_screen2.png)
+![alt text](https://github.com/duril84/city-pollution/blob/development/app_screen2.png)
 
 --------------------------------
 
@@ -14,8 +14,9 @@ Cities page:
 Clone repository
 - git clone https://github.com/duril84/city-pollution.git
 
-In the directory with the downloaded repository in city-pollution-app folder
+In the directory with the downloaded repository
 - git checkout development
+- npm install
 - npm start
 
  
