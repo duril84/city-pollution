@@ -35,7 +35,7 @@ class Home extends Component {
     const { items } = this.state;
     return (
       <div className="home">
-         <h1 className="title">City Pollution App</h1>
+        <h1 className="title">City Pollution App</h1>
         <Search onCountrySelected={this.onCountrySelected} suggestions={items} value={this.state.selectedCountry} placeholder={'Country'}/>
         <Button name={'Find Cities'} path={`/cities`} />
       </div>
