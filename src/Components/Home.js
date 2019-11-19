@@ -8,34 +8,27 @@ import '../Styles/_home.scss';
 class Home extends Component {
   state = {
     items: [
-      {name: 'Poland', code: 'PL'},
+      {name: 'Poland' , code: 'PL'},
       {name: 'Germany', code: 'DE'},
-      {name: 'Spain', code: 'ES'},
-      {name: 'France', code: 'FR'},
+      {name: 'Spain'  , code: 'ES'},
+      {name: 'France' , code: 'FR'},
     ],
-    selectedCountry: '',
-    selectedCountryCode: '',
+    selectedCountry: sessionStorage.getItem('appSessionStorage') ? JSON.parse( sessionStorage.getItem('appSessionStorage') ).selectedCountry : '',
+    selectedCountryCode: sessionStorage.getItem('appSessionStorage') ? JSON.parse( sessionStorage.getItem('appSessionStorage') ).selectedCountryCode: '',
   }
 
   onCountrySelected = (selectedCountry) => {
-    const selectedCountryCode = this.state.items.map(item => ( item.name === selectedCountry && ( item.code ) ) ).filter( v => v );
-    sessionStorage.setItem('appSessionStorage', selectedCountryCode);
-  
+    let selectedCountryCode = this.state.items.map(item => ( item.name.toLowerCase() === selectedCountry.toLowerCase() && ( item.code ) ) ).filter( v => v );
+    if ( selectedCountryCode.length ) {
+      selectedCountryCode = selectedCountryCode[0];
+    } else {
+      selectedCountryCode = '';
+    }
+    sessionStorage.setItem('appSessionStorage', JSON.stringify( { selectedCountryCode, selectedCountry } ) );
     this.setState({
       selectedCountry,
       selectedCountryCode,
     });
-  }
-
-  componentDidMount() {
-    if ( sessionStorage.getItem('appSessionStorage') !== null ) {
-      const selectedCountryCode = sessionStorage.getItem('appSessionStorage');
-      const selectedCountry = this.state.items.map(item => ( item.code === selectedCountryCode && ( item.name ) ) ).filter( v => v );
-      this.setState({
-        selectedCountry,
-        selectedCountryCode,
-      });
-    }
   }
 
   render() { 
@@ -44,7 +37,7 @@ class Home extends Component {
       <div className="home">
          <h1 className="title">City Pollution App</h1>
         <Search onCountrySelected={this.onCountrySelected} suggestions={items} value={this.state.selectedCountry} placeholder={'Country'}/>
-        <Button name={'Find Cities'} path={`/cities`} selectedCountryCode={this.state.selectedCountryCode}/>
+        <Button name={'Find Cities'} path={`/cities`} />
       </div>
     );
   }

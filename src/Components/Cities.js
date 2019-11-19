@@ -16,7 +16,7 @@ class Cities extends Component {
   }
 
   componentDidMount() {
-    const countryCode = sessionStorage.getItem('appSessionStorage');
+    const countryCode = JSON.parse( sessionStorage.getItem('appSessionStorage') ).selectedCountryCode;
     this.getMostPollutedCities(countryCode);
   }
   
@@ -91,7 +91,7 @@ class Cities extends Component {
             </div>
           )
         }
-        <Button name={'Home'} path={'/'} selectedCountryCode={sessionStorage.getItem('appSessionStorage')}/>
+        <Button name={'Home'} path={'/'} />
         
       </div>
     );
