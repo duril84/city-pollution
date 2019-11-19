@@ -17,7 +17,7 @@ class Search extends Component {
     return (
       <div className='search'>
         <label>Search cities in </label>
-        <input list='suggestions' onChange={e=>this.onCountrySelected(e)} placeholder={this.props.placeholder}/>
+        <input list='suggestions' onChange={e=>this.onCountrySelected(e)} value={this.props.value} placeholder={this.props.placeholder}/>
         <datalist id='suggestions'>
           { items.map( item => <option key={item.code} value={`${item.name}`} /> ) }
         </datalist>
