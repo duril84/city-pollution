@@ -43,7 +43,7 @@ class Cities extends Component {
           const pageNum = Object.keys(res.query.pages);
           let info = res.query.pages[pageNum[0]].extract;
           if ( typeof info !== 'string' ) {
-            info = 'Sorry, no data was found for the city'
+            info = 'Sorry, no data was found for this city'
           }
           this.setState({
             cities: [...this.state.cities, {name: city.name, value: city.value, date: city.date, description: info,}],
