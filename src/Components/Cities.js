@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from './Button';
 import Loader from 'react-loader-spinner'
 
+import CitiesList from './CitiesList';
+
 import '../Styles/_cities.scss';
 
 class Cities extends Component {
@@ -55,30 +57,12 @@ class Cities extends Component {
 
   render() { 
     const { cities } = this.state;
+
     return (
+      
       <div className="cities">
         <h1 className="title">{`Top 10 most polluted cities in 2019`}</h1>
-        { cities.length === 10 ? ( 
-            <ol className="list">
-              {
-              cities.sort((a, b) => b.value - a.value).map( (city,i) => {
-                const { name, value, description, date } = city;
-                const d = new Date(date); 
-                return (
-                  <li className="item" key={name} >
-                    <div className="top">
-                      <div className="name"> {i+1}. {name} </div>
-                      <div className="value"> pm2.5 value<br />{value} µg/m³ </div>
-                      <div className="date"> date of measurement<br />{d.getDate()}/{d.getMonth()+1}/{d.getFullYear()} </div>
-                    </div>
-                    <div className="bottom">
-                      <div className="description"> {description} </div> 
-                    </div>
-                  </li> 
-                )
-                })}
-            </ol>
-          ) : (
+        {cities.length === 10 ? <CitiesList  cities={cities} /> : (
             <div className="loader">
               <Loader
                 type="TailSpin"
@@ -88,8 +72,7 @@ class Cities extends Component {
                 timeout={0} //3 secs
               />
             </div>
-          )
-        }
+          )}
         <Button name={'Home'} path={'/'} />
         
       </div>
