@@ -23,13 +23,14 @@ class Search extends Component {
   }
 
   render() { 
-    const { items } = this.state;
+    const { items, value } = this.state;
+    const { placeholder } = this.props;
     return (
       <div className='search'>
         <label>Search cities in </label>
-        <input list='suggestions' onChange={e=>this.onCountrySelected(e)} value={this.state.value} placeholder={this.props.placeholder}/>
+        <input list='suggestions' onChange={e=>this.onCountrySelected(e)} value={value} placeholder={placeholder}/>
         <datalist id='suggestions'>
-          { items.map( item => <option key={item.code} value={`${item.name}`} /> ) }
+          { items.map( item => <option key={item.code} value={item.name} /> ) }
         </datalist>
       </div>
     );

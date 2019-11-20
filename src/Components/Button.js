@@ -4,7 +4,7 @@ import '../Styles/_button.scss';
 
 const Button = props => {
   const { path, name } = props;
-  if (  sessionStorage.getItem('appSessionStorage') === null  || !JSON.parse( sessionStorage.getItem('appSessionStorage') ).selectedCountryCode ) {
+  if (  sessionStorage.getItem('appSessionStorage') === null  || !JSON.parse( sessionStorage.getItem('appSessionStorage') ).code ) {
     return (
       <div className="button disabled" >
         {name}

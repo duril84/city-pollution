@@ -16,18 +16,17 @@ class Cities extends Component {
   }
 
   componentDidMount() {
-    const countryCode = JSON.parse( sessionStorage.getItem('appSessionStorage') ).selectedCountryCode;
+    const countryCode = JSON.parse( sessionStorage.getItem('appSessionStorage') ).code;
     this.getMostPollutedCities(countryCode);
   }
   
   getMostPollutedCities( countryCode ) {
-    let cities = [];
     fetch(`https://api.openaq.org/v1/measurements?country=${countryCode}&date_from=2019-01-01T00:00:00&parameter=pm25&order_by=value&sort=desc&limit=200`)
       .then( res => res.json() )
       .then( json => {
-        json.results.map(city => cities.push({name: city.city, value: city.value, date: city.date.utc, description: '',}) )
+        const cities = json.results.map(city => ({ name: city.city, value: city.value, date: city.date.utc, description: ''}) );
         const uniqueCities = this.getUnique(cities,'name').slice(0,10);
-        uniqueCities.map( city => { return ( this.getCityDescription(city)) } );
+        uniqueCities.map( city => this.getCityDescription(city) );
       })
       .catch(error => {
         throw(error);
@@ -63,17 +62,17 @@ class Cities extends Component {
             <ol className="list">
               {
               cities.sort((a, b) => b.value - a.value).map( (city,i) => {
-                const date = new Date(city.date); 
+                const { name, value, description, date } = city;
+                const d = new Date(date); 
                 return (
-                  <li className="item" key={city.name} >
+                  <li className="item" key={name} >
                     <div className="top">
-                      <div className="name"> {i+1}. {city.name} </div>
-                      <div className="value"> pm2.5 value<br />{city.value} µg/m³ </div>
-                      <div className="date"> date of measurement<br />{date.getDate()}/{date.getMonth()+1}/{date.getFullYear()} </div>
+                      <div className="name"> {i+1}. {name} </div>
+                      <div className="value"> pm2.5 value<br />{value} µg/m³ </div>
+                      <div className="date"> date of measurement<br />{d.getDate()}/{d.getMonth()+1}/{d.getFullYear()} </div>
                     </div>
                     <div className="bottom">
-                      <div className="description"> {city.description} </div> 
-                      {/* .slice(0,200)+'...' */}
+                      <div className="description"> {description} </div> 
                     </div>
                   </li> 
                 )
