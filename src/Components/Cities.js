@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from './Button';
 import Loader from 'react-loader-spinner'
 
+import CitiesList from './CitiesList';
+
 import '../Styles/_cities.scss';
 
 class Cities extends Component {
@@ -16,18 +18,17 @@ class Cities extends Component {
   }
 
   componentDidMount() {
-    const countryCode = sessionStorage.getItem('appSessionStorage');
+    const countryCode = JSON.parse( sessionStorage.getItem('appSessionStorage') ).code;
     this.getMostPollutedCities(countryCode);
   }
   
   getMostPollutedCities( countryCode ) {
-    let cities = [];
     fetch(`https://api.openaq.org/v1/measurements?country=${countryCode}&date_from=2019-01-01T00:00:00&parameter=pm25&order_by=value&sort=desc&limit=200`)
       .then( res => res.json() )
       .then( json => {
-        json.results.map(city => cities.push({name: city.city, value: city.value, date: city.date.utc, description: '',}) )
+        const cities = json.results.map(city => ({ name: city.city, value: city.value, date: city.date.utc, description: ''}) );
         const uniqueCities = this.getUnique(cities,'name').slice(0,10);
-        uniqueCities.map( city => { return ( this.getCityDescription(city)) } );
+        uniqueCities.map( city => this.getCityDescription(city) );
       })
       .catch(error => {
         throw(error);
@@ -56,30 +57,12 @@ class Cities extends Component {
 
   render() { 
     const { cities } = this.state;
+
     return (
+      
       <div className="cities">
         <h1 className="title">{`Top 10 most polluted cities in 2019`}</h1>
-        { cities.length === 10 ? ( 
-            <ol className="list">
-              {
-              cities.sort((a, b) => b.value - a.value).map( (city,i) => {
-                const date = new Date(city.date); 
-                return (
-                  <li className="item" key={city.name} >
-                    <div className="top">
-                      <div className="name"> {i+1}. {city.name} </div>
-                      <div className="value"> pm2.5 value<br />{city.value} µg/m³ </div>
-                      <div className="date"> date of measurement<br />{date.getDate()}/{date.getMonth()+1}/{date.getFullYear()} </div>
-                    </div>
-                    <div className="bottom">
-                      <div className="description"> {city.description} </div> 
-                      {/* .slice(0,200)+'...' */}
-                    </div>
-                  </li> 
-                )
-                })}
-            </ol>
-          ) : (
+        {cities.length === 10 ? <CitiesList  cities={cities} /> : (
             <div className="loader">
               <Loader
                 type="TailSpin"
@@ -89,9 +72,8 @@ class Cities extends Component {
                 timeout={0} //3 secs
               />
             </div>
-          )
-        }
-        <Button name={'Home'} path={'/'} selectedCountryCode={sessionStorage.getItem('appSessionStorage')}/>
+          )}
+        <Button name={'Home'} path={'/'} />
         
       </div>
     );

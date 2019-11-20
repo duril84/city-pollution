@@ -8,43 +8,35 @@ import '../Styles/_home.scss';
 class Home extends Component {
   state = {
     items: [
-      {name: 'Poland', code: 'PL'},
+      {name: 'Poland' , code: 'PL'},
       {name: 'Germany', code: 'DE'},
-      {name: 'Spain', code: 'ES'},
-      {name: 'France', code: 'FR'},
+      {name: 'Spain'  , code: 'ES'},
+      {name: 'France' , code: 'FR'},
     ],
-    selectedCountry: '',
-    selectedCountryCode: '',
+    selectedCountry: sessionStorage.getItem('appSessionStorage') ? JSON.parse( sessionStorage.getItem('appSessionStorage') ) : '',
   }
 
-  onCountrySelected = (selectedCountry) => {
-    const selectedCountryCode = this.state.items.map(item => ( item.name === selectedCountry && ( item.code ) ) ).filter( v => v );
-    sessionStorage.setItem('appSessionStorage', selectedCountryCode);
-  
+  onCountrySelected = (name) => {
+    let code = this.state.items.map(item => ( item.name.toLowerCase() === name.toLowerCase() && ( item.code ) ) ).filter( v => v );
+    if ( code.length ) {
+      code = code[0];
+    } else {
+      code = '';
+    }
+    const selectedCountry = { code, name }
+    sessionStorage.setItem('appSessionStorage', JSON.stringify( selectedCountry ) );
     this.setState({
       selectedCountry,
-      selectedCountryCode,
     });
   }
 
-  componentDidMount() {
-    if ( sessionStorage.getItem('appSessionStorage') !== null ) {
-      const selectedCountryCode = sessionStorage.getItem('appSessionStorage');
-      const selectedCountry = this.state.items.map(item => ( item.code === selectedCountryCode && ( item.name ) ) ).filter( v => v );
-      this.setState({
-        selectedCountry,
-        selectedCountryCode,
-      });
-    }
-  }
-
   render() { 
-    const { items } = this.state;
+    const { items, selectedCountry } = this.state;
     return (
       <div className="home">
-         <h1 className="title">City Pollution App</h1>
-        <Search onCountrySelected={this.onCountrySelected} suggestions={items} value={this.state.selectedCountry} placeholder={'Country'}/>
-        <Button name={'Find Cities'} path={`/cities`} selectedCountryCode={this.state.selectedCountryCode}/>
+        <h1 className="title">City Pollution App</h1>
+        <Search onCountrySelected={this.onCountrySelected} suggestions={items} value={selectedCountry.name || ''} placeholder={'Country'}/>
+        <Button name={'Find Cities'} path={`/cities`} />
       </div>
     );
   }
