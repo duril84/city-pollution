@@ -5,9 +5,47 @@
   flex-direction: column;
   .title{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 5vw;
+    font-size: 3vw;
     font-weight: 800;
+    text-align: center;
     color: #4C69A2;
+  }
+
+}
+
+@media ( orientation: landscape ) and (min-resolution: 124dpi ) {
+  .home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .title{
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 5vw;
+      font-weight: 800;
+      text-align: center;
+      color: #4C69A2;
+    }
+  
   }
 }
 
+@media ( orientation: portrait ) {
+  .home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .title{
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 6vh;
+      font-weight: 800;
+      color: #4C69A2;
+    }
+  
+  }
+}
+
+@media screen and (max-width: 600px){
+
+}

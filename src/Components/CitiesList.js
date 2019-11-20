@@ -12,8 +12,10 @@ const CitiesList = props => {
           <li className="item" key={name} >
             <div className="top">
               <div className="name"> {i+1}. {name} </div>
-              <div className="value"> pm2.5 value<br />{value} µg/m³ </div>
-              <div className="date"> date of measurement<br />{d.getDate()}/{d.getMonth()+1}/{d.getFullYear()} </div>
+              <div className='measurement'>
+                <div className="value"> pm2.5 value<br />{value} µg/m³ </div>
+                <div className="date"> date of measurement<br />{d.getDate()}/{d.getMonth()+1}/{d.getFullYear()} </div>
+              </div>
             </div>
             <div className="bottom">
               <div className="description"> {description} </div> 
