@@ -35,7 +35,7 @@ class Home extends Component {
     return (
       <div className="home">
         <h1 className="title">City Pollution App</h1>
-        <Search onCountrySelected={this.onCountrySelected} suggestions={items} value={selectedCountry.name} placeholder={'Country'}/>
+        <Search onCountrySelected={this.onCountrySelected} suggestions={items} value={selectedCountry.name || ''} placeholder={'Country'}/>
         <Button name={'Find Cities'} path={`/cities`} />
       </div>
     );
