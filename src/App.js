@@ -6,10 +6,11 @@ import Cities from './Components/Cities'
 
 import './Styles/_app.scss';
 
-
-function App() {
-  return (
-    <div className="app">
+class App extends React.Component {
+  render() { 
+    return (
+      <div className="app">
+      
       <Router>
         <Switch>
           <Route exact path={`/`} 
@@ -23,7 +24,8 @@ function App() {
         </Switch>
       </Router>
     </div>
-  );
+    );
+  }
 }
-
+ 
 export default App;

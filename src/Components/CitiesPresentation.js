@@ -19,7 +19,7 @@ const CitiesPresentation = props => {
               color="#4C69A2"
               height={100}
               width={100}
-              timeout={0} //3 secs
+              timeout={0}
             />
           </div>
         )}
@@ -28,5 +28,4 @@ const CitiesPresentation = props => {
   )
 }
 
- 
 export default CitiesPresentation;
