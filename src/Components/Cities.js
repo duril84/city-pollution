@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 
 import CitiesPresentation from './CitiesPresentation';
 
+import { connect } from 'react-redux';
+import { citiesFetched, citiesClear } from '../redux/actions'
+
 
 class Cities extends Component {
-  state = {
-    cities: [],
-  }
-
   getUnique(arr,comp){
     const unique =  arr.map( e => e[comp] ).map((e,i,final) =>final.indexOf(e) === i && i) 
     .filter((e)=> arr[e]).map(e=>arr[e]);
@@ -16,6 +15,7 @@ class Cities extends Component {
 
   componentDidMount() {
     const countryCode = JSON.parse( sessionStorage.getItem('appSessionStorage') ).code;
+    this.props.citiesClear();
     this.getMostPollutedCities(countryCode);
   }
   
@@ -43,9 +43,7 @@ class Cities extends Component {
           if ( typeof info !== 'string' ) {
             info = 'Sorry, no data was found for this city'
           }
-          this.setState({
-            cities: [...this.state.cities, {name: city.name, value: city.value, date: city.date, description: info,}],
-          })
+          this.props.citiesFetched( [...this.props.cities, {name: city.name, value: city.value, date: city.date, description: info,}] )
       })
       .catch(error => {
         throw(error);
@@ -53,12 +51,17 @@ class Cities extends Component {
   }
 
   render() { 
-    const { cities } = this.state;
+    const { cities } = this.props;
     const isLoaded = cities.length === 10 ? true : false;
     return (
       <CitiesPresentation  cities={cities} isLoaded={isLoaded} /> 
     );
   }
 }
- 
-export default Cities;
+
+const mapStateToProps = (state) => {
+  return { cities: state.cities }
+ }
+const mapDispatchToProps = { citiesFetched, citiesClear };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);
