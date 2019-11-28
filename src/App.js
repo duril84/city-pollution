@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from './Components/Home'
-import Cities from './Components/Cities'
+import CitiesFetch from './Components/CitiesFetch'
 
 import './Styles/_app.scss';
 
@@ -19,7 +19,7 @@ class App extends React.Component {
           )}/>
           <Route path={`/cities`}
             render={ props => (
-              <Cities />
+              <CitiesFetch />
           )}/>
         </Switch>
       </Router>

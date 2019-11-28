@@ -31,6 +31,7 @@
       display: flex;
       flex-direction: column;
       .top {
+        cursor: pointer;
         background-color: #4C69A2;
         color: white;
         border-radius: 0 20px 0 0px;
@@ -58,6 +59,9 @@
           font-size: 2.5vh;
           width: 50%;
         }
+        &:hover {
+          background-color: lighten($color: #4C69A2, $amount: 10);
+        }
       }
       @media ( orientation: portrait) {
         .top{
@@ -80,6 +84,11 @@
         align-items: center;
         font-size: 2vh;
       }
+
+      .hide {
+        display: none;
+      }
+      
     }
   }
   .loader {

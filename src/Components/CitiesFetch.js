@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { citiesFetched, citiesClear } from '../redux/actions'
 
 
-class Cities extends Component {
+class CitiesFetch extends Component {
   getUnique(arr,comp){
     const unique =  arr.map( e => e[comp] ).map((e,i,final) =>final.indexOf(e) === i && i) 
     .filter((e)=> arr[e]).map(e=>arr[e]);
@@ -64,4 +64,4 @@ const mapStateToProps = (state) => {
  }
 const mapDispatchToProps = { citiesFetched, citiesClear };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cities);
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesFetch);

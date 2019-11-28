@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 import Loader from 'react-loader-spinner'
 
-import CitiesList from './CitiesList';
+import List from './List';
 import '../Styles/_cities.scss';
 
 const CitiesPresentation = props => {
@@ -11,7 +11,7 @@ const CitiesPresentation = props => {
     <div className="cities">
       <h1 className="title">{`Top 10 most polluted cities in 2019`}</h1>
       { isLoaded ?
-        <CitiesList  cities={cities} /> : 
+        <List data={cities} /> : 
         (
           <div className="loader">
             <Loader
